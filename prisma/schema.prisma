@@ -1,6 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+//npx prisma migrate dev => para criar uma migration
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +6,67 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String    @id @default(uuid())
+  name       String
+  email      String
+  password   String
+  created_at DateTime? @default(now())
+  update_at  DateTime? @default(now())
+
+  @@map("users")
+}
+
+model Category {
+  id         String    @id @default(uuid())
+  name       String
+  created_at DateTime? @default(now())
+  update_at  DateTime? @default(now())
+  products   Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  price       String
+  banner      String
+  description String
+  created_at  DateTime? @default(now())
+  update_at   DateTime? @default(now())
+  Category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+  Item        Item[]
+
+  @@map("products")
+}
+
+model Order {
+  id         String    @id @default(uuid())
+  table      Int
+  status     Boolean   @default(false)
+  draft      Boolean   @default(true)
+  name       String?
+  created_at DateTime? @default(now())
+  update_at  DateTime? @default(now())
+  itens      Item[]
+
+  @@map("ordes")
+}
+
+model Item {
+  id         String    @id @default(uuid())
+  amount     Int
+  created_at DateTime? @default(now())
+  update_at  DateTime? @default(now())
+
+  Order     Order?  @relation(fields: [orderId], references: [id])
+  orderId   String?
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("itens")
 }
