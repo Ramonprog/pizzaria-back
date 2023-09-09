@@ -1,9 +1,10 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import { CreateUserController } from "../controllers/user/createUserController";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  throw new Error("deu ruim");
-});
+const userController = new CreateUserController();
+
+router.post("/user", userController.handle);
 
 export { router };
