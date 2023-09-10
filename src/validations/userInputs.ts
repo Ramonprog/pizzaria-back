@@ -14,3 +14,9 @@ export const Login = z
     password: z.string(),
   })
   .strict();
+
+export const CategoryValidation = z
+  .object({
+    name: z.string(),
+  })
+  .strict();
