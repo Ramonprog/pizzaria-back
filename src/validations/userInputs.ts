@@ -20,3 +20,13 @@ export const CategoryValidation = z
     name: z.string(),
   })
   .strict();
+
+export const Product = z
+  .object({
+    name: z.string(),
+    price: z.string(),
+    banner: z.string(),
+    description: z.string(),
+    category_id: z.string(),
+  })
+  .strict();
