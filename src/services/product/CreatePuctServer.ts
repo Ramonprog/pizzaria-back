@@ -1,3 +1,5 @@
+import prismaClient from "../../prisma";
+
 interface IPdoduct {
   name: string;
   price: string;
@@ -8,7 +10,17 @@ interface IPdoduct {
 
 class CreatePuctServer {
   async execute({ banner, category_id, description, name, price }: IPdoduct) {
-    return "deu bom";
+    const product = await prismaClient.product.create({
+      data: {
+        banner,
+        description,
+        name,
+        price,
+        categoryId: category_id,
+      },
+    });
+
+    return product;
   }
 }
 

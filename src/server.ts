@@ -6,8 +6,11 @@ import cors from "cors";
 const app = express();
 app.use(express.json());
 app.use(cors());
+import path from "path";
 
 app.use(router);
+
+app.use("/files", express.static(path.resolve(__dirname, "..", "tmp")));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {

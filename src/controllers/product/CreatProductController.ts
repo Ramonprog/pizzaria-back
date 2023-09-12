@@ -11,14 +11,10 @@ class CreatProductController {
       if (!req.file) {
         throw new Error("Error upload file");
       } else {
-        const { originalname, filename } = req.file;
-        console.log(
-          "🚀 ~ file: CreatProductController.ts:15 ~ CreatProductController ~ handle ~ fieldname:",
-          filename
-        );
+        const { originalname, filename: banner } = req.file;
 
         const product = await createProductService.execute({
-          banner: "",
+          banner,
           category_id,
           description,
           name,
