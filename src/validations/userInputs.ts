@@ -30,3 +30,10 @@ export const Product = z
     category_id: z.string(),
   })
   .strict();
+
+export const OrderValidation = z
+  .object({
+    name: z.string(),
+    table: z.number(),
+  })
+  .strict();
