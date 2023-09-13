@@ -37,3 +37,11 @@ export const OrderValidation = z
     table: z.number(),
   })
   .strict();
+
+export const AddItemValidation = z
+  .object({
+    orderId: z.string(),
+    productId: z.string(),
+    amount: z.number(),
+  })
+  .strict();
